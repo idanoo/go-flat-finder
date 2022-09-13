@@ -45,6 +45,12 @@ func (c *LocalConfig) sendEmbeddedMessage(listing TradeMeListing) {
 		AddField("Location", listing.Address, true).
 		AddField("Bedrooms", fmt.Sprintf("%d", listing.Bedrooms), true)
 
+	// Only add address if token set
+	if c.GoogleApiToken != "" && c.GoogleLocation1 != "" {
+		distance := getDistanceFromAddress(listing.Address, c.GoogleLocation1)
+		embed = embed.AddField(fmt.Sprintf("Distance to %s", c.GoogleLocation1), distance, false)
+	}
+
 	embeds := []discord.Embed{}
 	embeds = append(embeds, embed.Build())
 	_, err := c.DiscordClient.CreateEmbeds(embeds)
