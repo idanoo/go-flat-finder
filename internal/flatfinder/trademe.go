@@ -105,8 +105,8 @@ type TradeMeListing struct {
 }
 
 func (c *LocalConfig) searchTrademe() error {
-	// Only show last 2 hours of posts
-	dateFrom := time.Now().Add(-time.Hour * 6)
+	// Only pull last 2 hours by default
+	dateFrom := time.Now().Add(-time.Hour * 8)
 
 	// Set filters
 	queryParams := url.Values{}

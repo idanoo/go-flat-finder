@@ -25,6 +25,7 @@ func main() {
 	if flatfinder.Conf.DiscordWebhook == "" {
 		log.Fatal("DISCORD_WEBHOOK not set")
 	}
+	flatfinder.Conf.DiscordTag = os.Getenv("DISCORD_TAG")
 
 	// Load Google stuff
 	flatfinder.Conf.GoogleApiToken = os.Getenv("GOOGLE_API_KEY")

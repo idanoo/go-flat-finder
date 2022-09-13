@@ -3,8 +3,8 @@ Description=FlatFinder
 After=network.target
 
 [Service]
-ExecStart=/root/flatfinder
-WorkingDirectory=/root
+ExecStart=/root/flat-finder/flatfinder
+WorkingDirectory=/root/flat-finder
 Type=simple
 Restart=always
 RestartSec=5

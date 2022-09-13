@@ -65,10 +65,20 @@ func (c *LocalConfig) sendEmbeddedMessage(listing TradeMeListing) {
 		AddField("Fibre Avail", hasFibre, false).
 		AddField("Current Connection", currentConn, false)
 
+	// Tag if required
+	if c.DiscordTag != "" {
+		embed.SetDescription(c.DiscordTag)
+	}
+
 	// Only add address if token set
 	if c.GoogleApiToken != "" && c.GoogleLocation1 != "" {
-		distance := getDistanceFromAddress(listing.Address, c.GoogleLocation1)
-		embed = embed.AddField(fmt.Sprintf("Distance to %s", c.GoogleLocation1), distance, false)
+		distance := c.getDistanceFromAddress(c.GoogleLocation1, listing.GeographicLocation.Latitude, listing.GeographicLocation.Longitude)
+		embed = embed.AddField(fmt.Sprintf("Walking distance to %s", c.GoogleLocation1), distance, false)
+	}
+
+	if c.GoogleApiToken != "" && c.GoogleLocation2 != "" {
+		distance := c.getDistanceFromAddress(c.GoogleLocation2, listing.GeographicLocation.Latitude, listing.GeographicLocation.Longitude)
+		embed = embed.AddField(fmt.Sprintf("Walking distance to %s", c.GoogleLocation2), distance, false)
 	}
 
 	embeds := []discord.Embed{}

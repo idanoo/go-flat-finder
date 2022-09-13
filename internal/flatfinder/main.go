@@ -10,6 +10,7 @@ import (
 // Our local struct we will store data during runtime
 type LocalConfig struct {
 	DiscordWebhook string         `json:"-"`
+	DiscordTag     string         `json:"-"`
 	DiscordClient  webhook.Client `json:"-"`
 
 	GoogleApiToken  string `json:"-"`
