@@ -1,5 +1,8 @@
 # FlatFinder Bot
 
+[![Build Status](https://ci.tinker.nz/api/badges/idanoo/flat-finder/status.svg)](https://ci.tinker.nz/idanoo/flat-finder) 
+    
+
 * Uses the Trade Me API to grab new rental properties that have been recently listed
 * Checks if fibre and VDSL are available by querying Chorus
 * Includes travel times to various locations

@@ -32,7 +32,10 @@ func (c *LocalConfig) loadConfig() {
 		}
 
 		// Load it into global
-		json.Unmarshal(data, c)
+		err = json.Unmarshal(data, c)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		log.Printf("Loaded %d previously posted property IDs", len(c.PostedProperties))
 	} else {
