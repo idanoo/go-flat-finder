@@ -37,7 +37,7 @@ func (c *LocalConfig) initDiscord() {
 func (c *LocalConfig) sendEmbeddedMessage(listing TradeMeListing) {
 	log.Printf("New listing: %s", listing.Title)
 
-	hasFibre := getAvailableSpeeds(
+	hasFibre, currentConn := getAvailableSpeeds(
 		fmt.Sprintf(
 			"%s, %s, %s",
 			strings.TrimSpace(listing.Address),
@@ -62,7 +62,8 @@ func (c *LocalConfig) sendEmbeddedMessage(listing TradeMeListing) {
 			true,
 		).
 		AddField("Bedrooms", fmt.Sprintf("%d", listing.Bedrooms), true).
-		AddField("Has Fibre", hasFibre, true)
+		AddField("Fibre Avail", hasFibre, false).
+		AddField("Current Connection", currentConn, false)
 
 	// Only add address if token set
 	if c.GoogleApiToken != "" && c.GoogleLocation1 != "" {
