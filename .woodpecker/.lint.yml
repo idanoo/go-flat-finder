@@ -1,0 +1,5 @@
+pipeline:
+  lint:
+    image: golang:1.19.1
+    commands:
+      - go mod tidy
