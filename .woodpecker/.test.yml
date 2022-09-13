@@ -1,8 +1,0 @@
-pipeline:
-  tests:
-    image: golang:1.19.1
-    commands:  
-      - go mod tidy
-
-depends_on:
-  - lint
