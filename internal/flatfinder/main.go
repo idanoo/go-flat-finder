@@ -57,8 +57,6 @@ func Launch() {
 
 // pollUpdates - check for new listings!
 func (c *LocalConfig) pollUpdates() {
-	log.Printf("Polling for updates")
-
 	err := Conf.searchTrademe()
 	if err != nil {
 		log.Println(err)

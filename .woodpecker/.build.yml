@@ -3,6 +3,7 @@ pipeline:
     image: golang:1.19.1
     commands:
       - go mod tidy
+      - go build -o flatfinder ./cmd/flatfinder
 
 depends_on:
   - lint

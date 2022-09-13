@@ -37,13 +37,32 @@ func (c *LocalConfig) initDiscord() {
 func (c *LocalConfig) sendEmbeddedMessage(listing TradeMeListing) {
 	log.Printf("New listing: %s", listing.Title)
 
+	hasFibre := getAvailableSpeeds(
+		fmt.Sprintf(
+			"%s, %s, %s",
+			strings.TrimSpace(listing.Address),
+			strings.TrimSpace(listing.Suburb),
+			strings.TrimSpace(listing.Region),
+		),
+	)
+
 	embed := discord.NewEmbedBuilder().
 		SetTitle(listing.Title).
 		SetURL(fmt.Sprintf("https://trademe.co.nz/%d", listing.ListingID)).
 		SetColor(1127128).
 		SetImage(listing.PictureHref).
-		AddField("Location", listing.Address, true).
-		AddField("Bedrooms", fmt.Sprintf("%d", listing.Bedrooms), true)
+		AddField(
+			"Location",
+			fmt.Sprintf(
+				"[%s](https://maps.google.com/maps?z=12&t=m&q=loc:%f+%f)",
+				listing.Address,
+				listing.GeographicLocation.Latitude,
+				listing.GeographicLocation.Longitude,
+			),
+			true,
+		).
+		AddField("Bedrooms", fmt.Sprintf("%d", listing.Bedrooms), true).
+		AddField("Has Fibre", hasFibre, true)
 
 	// Only add address if token set
 	if c.GoogleApiToken != "" && c.GoogleLocation1 != "" {

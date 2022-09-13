@@ -39,6 +39,7 @@ func (c *LocalConfig) loadConfig() {
 
 		log.Printf("Loaded %d previously posted property IDs", len(c.PostedProperties))
 	} else {
+		// Create empty map for first run
 		maps := make(map[int64]bool)
 		c.PostedProperties = maps
 	}

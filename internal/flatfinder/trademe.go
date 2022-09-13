@@ -164,7 +164,7 @@ func (c *LocalConfig) handleTrademeResponse(responseJson []byte) error {
 		return err
 	}
 
-	log.Printf("Query complete. Result count: %d", resultSet.TotalCount)
+	log.Printf("Query complete. Listings: %d", resultSet.TotalCount)
 	for _, result := range resultSet.List {
 		c.parseTrademeListing(result)
 	}
